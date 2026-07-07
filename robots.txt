@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vivian66323-afk.github.io/idal/sitemap.xml
