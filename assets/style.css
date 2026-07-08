@@ -462,6 +462,22 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
 }
 .item-row.pending .item-title, .item-row.pending .item-date { color: var(--silver); }
 
+.item-row.has-thumb { grid-template-columns: 130px 128px 1fr auto; align-items: start; }
+.item-thumb {
+  width: 128px;
+  height: 96px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1);
+  transition: filter 0.35s ease;
+}
+.item-row:hover .item-thumb { filter: none; }
+@media (max-width: 640px) {
+  .item-row.has-thumb { grid-template-columns: 1fr; }
+  .item-thumb { width: 100%; height: auto; max-height: 220px; object-fit: cover; }
+}
+@media (prefers-reduced-motion: reduce) { .item-thumb { transition: none; filter: none; } }
+
 /* ---------- Insights ---------- */
 .insight-list { border-top: 1px solid var(--hairline); max-width: 1020px; }
 .insight {
