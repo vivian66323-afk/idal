@@ -52,13 +52,12 @@ body {
   flex-shrink: 0;
 }
 .nav .mark img { height: 38px; width: auto; display: block; }
-.nav .mark .mark-text {
-  font-family: var(--font-didone);
-  font-size: 19px;
-  letter-spacing: 0.22em;
-  color: var(--paper);
+.nav .mark .mark-word {
+  height: 13px;
+  width: auto;
+  display: block;
 }
-@media (max-width: 560px) { .nav .mark .mark-text { display: none; } }
+@media (max-width: 560px) { .nav .mark .mark-word { display: none; } }
 .nav ul {
   display: flex;
   gap: clamp(12px, 2.6vw, 36px);
