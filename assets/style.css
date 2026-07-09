@@ -462,6 +462,8 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
 .item-row.pending .item-title, .item-row.pending .item-date { color: var(--silver); }
 .item-title a { color: inherit; text-decoration: none; }
 .item-title a:hover, .item-title a:focus-visible { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.item-sub a { color: var(--gold); text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
+.item-sub a:hover, .item-sub a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
 
 .item-row.has-thumb { grid-template-columns: 130px 128px 1fr auto; align-items: start; }
 .item-thumb {
