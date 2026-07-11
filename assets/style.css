@@ -577,7 +577,7 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
   overflow: hidden;
   transition: max-height 0.45s ease;
 }
-.insight.open .i-body { max-height: 600px; }
+.insight.open .i-body { max-height: 900px; }
 .insight .i-body p {
   margin-top: 16px;
   font-size: 13.5px;
