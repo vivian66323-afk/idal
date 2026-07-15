@@ -1,3 +1,18 @@
+// 手機版導覽：點連結後收合選單、Enter/Space 可開合漢堡
+(function () {
+  var toggle = document.getElementById("nav-toggle");
+  if (!toggle) return;
+  document.querySelectorAll(".nav ul a").forEach(function (a) {
+    a.addEventListener("click", function () { toggle.checked = false; });
+  });
+  var burger = document.querySelector(".nav-burger");
+  if (burger) {
+    burger.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle.checked = !toggle.checked; }
+    });
+  }
+})();
+
 // 四大軸／觀點卡片：點擊展開收合
 document.querySelectorAll(".pillar").forEach(function (p) {
   p.addEventListener("click", function () {
