@@ -127,13 +127,6 @@ body {
   .nav-toggle:checked ~ .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle:checked ~ .nav-burger span:nth-child(2) { opacity: 0; }
   .nav-toggle:checked ~ .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .insight.has-img { grid-template-columns: 1fr; }
-  .insight.has-img .i-img { grid-row: auto; margin-bottom: 20px; aspect-ratio: 16 / 10; }
-  .insight.has-img .i-tag,
-  .insight.has-img .i-title,
-  .insight.has-img .i-teaser,
-  .insight.has-img .i-body,
-  .insight.has-img .i-more { grid-column: 1; }
 }
 
 /* ---------- Hero ---------- */
@@ -709,6 +702,16 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
   color: var(--silver);
 }
 .insight:hover .i-title { text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 1px; }
+/* mobile: image posts stack single-column — placed after the desktop .insight.has-img rule so source order wins at equal specificity */
+@media (max-width: 720px) {
+  .insight.has-img { grid-template-columns: 1fr; }
+  .insight.has-img .i-img { grid-row: auto; margin-bottom: 20px; aspect-ratio: 16 / 10; }
+  .insight.has-img .i-tag,
+  .insight.has-img .i-title,
+  .insight.has-img .i-teaser,
+  .insight.has-img .i-body,
+  .insight.has-img .i-more { grid-column: 1; }
+}
 
 /* ---------- Footer ---------- */
 footer {
