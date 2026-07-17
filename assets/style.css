@@ -552,6 +552,120 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
   color: var(--silver);
 }
 
+/* ---------- Chair profile (members page featured) ---------- */
+.chair-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  column-gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+  max-width: 1020px;
+}
+.chair-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  background: var(--hairline);
+  filter: grayscale(1);
+  transition: filter 0.55s ease;
+}
+.chair-card:hover .chair-photo { filter: none; }
+.chair-photo.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-didone);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--silver);
+  line-height: 2;
+}
+.chair-name { font-size: 22px; font-weight: 400; letter-spacing: 0.14em; }
+.chair-name .en {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-didone);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.chair-role { margin-top: 12px; font-size: 12px; letter-spacing: 0.2em; color: var(--gold); }
+.chair-quote {
+  margin-top: 20px;
+  padding-left: 16px;
+  border-left: 2px solid var(--gold);
+  font-size: 15px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+.chair-bio {
+  margin-top: 18px;
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 2.1;
+  letter-spacing: 0.06em;
+  color: var(--graphite);
+  max-width: 44em;
+}
+.chair-meta { margin-top: 20px; }
+.chair-meta dt {
+  font-family: var(--font-didone);
+  font-size: 10.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-top: 14px;
+}
+.chair-meta dd { font-size: 13.5px; font-weight: 300; letter-spacing: 0.06em; line-height: 1.9; color: var(--graphite); }
+.chair-links { margin-top: 22px; display: flex; gap: 16px; flex-wrap: wrap; }
+.chair-links a {
+  font-family: var(--font-didone);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 3px;
+}
+.chair-links a:hover { color: var(--gold); }
+@media (max-width: 720px) {
+  .chair-card { grid-template-columns: 1fr; }
+  .chair-photo { max-width: 260px; margin-bottom: 24px; }
+}
+
+/* ---------- Member profile guide ---------- */
+.profile-guide { max-width: 860px; }
+.profile-guide .sub {
+  font-size: 13.5px; font-weight: 300; letter-spacing: 0.06em;
+  color: var(--graphite); line-height: 2; max-width: 44em;
+}
+.profile-guide ol { list-style: none; counter-reset: g; margin-top: 20px; }
+.profile-guide li {
+  counter-increment: g;
+  position: relative;
+  padding-left: 38px;
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1.9;
+  color: var(--graphite);
+}
+.profile-guide li::before {
+  content: counter(g, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-family: var(--font-didone);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.profile-guide .hero-cta { margin-top: 28px; }
+
 /* ---------- Item list (media / events) ---------- */
 .item-list { border-top: 1px solid var(--hairline); max-width: 1020px; }
 .item-row {
