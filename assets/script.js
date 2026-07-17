@@ -30,6 +30,27 @@ document.querySelectorAll(".insight").forEach(function (n) {
   });
 });
 
+// 會員名錄：依服務地區篩選
+(function () {
+  var btns = document.querySelectorAll(".df-btn");
+  if (!btns.length) return;
+  var cards = document.querySelectorAll(".directory-grid .member-card");
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var region = b.dataset.region;
+      btns.forEach(function (x) {
+        var on = x === b;
+        x.classList.toggle("active", on);
+        x.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      cards.forEach(function (c) {
+        var show = region === "all" || c.dataset.region === region;
+        c.style.display = show ? "" : "none";
+      });
+    });
+  });
+})();
+
 // 進場顯示
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (reduced) {
