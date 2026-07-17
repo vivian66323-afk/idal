@@ -667,6 +667,7 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
 .profile-guide .hero-cta { margin-top: 28px; }
 
 /* ---------- Item list (media / events) ---------- */
+.awards-lead { max-width: 44em; font-size: 13.5px; font-weight: 300; letter-spacing: 0.06em; line-height: 2; color: var(--graphite); margin-bottom: 22px; }
 .item-list { border-top: 1px solid var(--hairline); max-width: 1020px; }
 .item-row {
   display: grid;
