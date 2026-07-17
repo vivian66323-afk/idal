@@ -566,10 +566,7 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
   object-fit: cover;
   display: block;
   background: var(--hairline);
-  filter: grayscale(1);
-  transition: filter 0.55s ease;
 }
-.chair-card:hover .chair-photo { filter: none; }
 .chair-photo.placeholder {
   display: flex;
   align-items: center;
