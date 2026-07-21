@@ -607,6 +607,10 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
   display: block;
   background: var(--hairline);
 }
+a.cw-item { display: block; text-decoration: none; color: inherit; }
+a.cw-item img { transition: opacity 0.35s ease; }
+a.cw-item:hover img { opacity: 0.82; }
+a.cw-item:hover .cw-cap { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .cw-cap {
   display: block;
   margin-top: 9px;
