@@ -599,7 +599,7 @@ section { padding: clamp(64px, 12vh, 140px) clamp(20px, 5vw, 64px); }
   color: var(--silver);
   margin-bottom: 12px;
 }
-.cw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 540px; }
+.cw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 760px; }
 .cw-item img {
   width: 100%;
   aspect-ratio: 3 / 2;
