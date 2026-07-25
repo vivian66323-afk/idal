@@ -910,3 +910,116 @@ footer .fs {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .reveal.in { opacity: 1; transform: none; }
+
+/* ============================================================
+   View Transitions — 換頁優雅轉場（原生 MPA・漸進增強・2026-07 新增）
+   只新增、不改動任何既有樣式。不支援的瀏覽器自動忽略、正常跳頁。
+   尊重 prefers-reduced-motion。移除本段即完全復原。
+   ============================================================ */
+@view-transition {
+  navigation: auto;
+}
+
+/* 導覽列 logo 跨頁不閃動、平滑銜接，強化精品連貫感 */
+.nav .mark {
+  view-transition-name: idal-mark;
+}
+
+/* 整頁淡入淡出：比預設更柔、稍慢，襯托精品調性 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+/* 無障礙：使用者若設定「減少動態」，一律關閉轉場 */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
+/* ============================================================
+   Micro-interactions — 精緻互動細節（2026-07 新增・只新增不改動既有）
+   全部尊重 prefers-reduced-motion；移除本段即完全復原。
+   ============================================================ */
+
+/* ① 導覽列 hover：金色底線由左優雅展開 */
+.nav ul a { position: relative; }
+.nav ul a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 100%; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.33, 0, 0.2, 1);
+}
+.nav ul a:hover::after { transform: scaleX(1); }
+.nav ul a[aria-current="page"]::after { display: none; } /* 現任頁已有金色底線，避免重疊 */
+
+/* ② 按鈕 hover：輕微上浮，增加觸感（維持扁平調性、不加陰影） */
+.btn-primary, .btn-ghost {
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.btn-primary:hover, .btn-ghost:hover { transform: translateY(-2px); }
+
+/* ③ 會員卡 hover：反白同時輕微上浮 */
+.member-card { transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease; }
+.member-card:hover { transform: translateY(-3px); }
+
+/* ④ 首頁 Hero 進場：元素依序柔和浮現 */
+@keyframes idal-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero .eyebrow,
+.hero .wordmark-img,
+.hero .hero-cta,
+.hero .vertical {
+  animation: idal-rise 0.7s cubic-bezier(0.33, 0, 0.2, 1) both;
+}
+.hero .eyebrow      { animation-delay: 0.05s; }
+.hero .wordmark-img { animation-delay: 0.18s; }
+.hero .hero-cta     { animation-delay: 0.32s; }
+.hero .vertical     { animation-delay: 0.46s; }
+
+/* 無障礙：減少動態時全部關閉 */
+@media (prefers-reduced-motion: reduce) {
+  .nav ul a::after { transition: none; }
+  .btn-primary:hover, .btn-ghost:hover, .member-card:hover { transform: none; }
+  .hero .eyebrow, .hero .wordmark-img, .hero .hero-cta, .hero .vertical { animation: none; }
+}
+
+/* ============================================================
+   進階滾動效果 CSS（2026-07 新增・搭配 script.js 末段）
+   ============================================================ */
+
+/* 這幾個容器交給子元素依序滑入，容器本身不再整塊淡入（避免雙重動畫） */
+.pillars.reveal, .directory-grid.reveal, .benefits.reveal,
+.item-list.reveal, .insight-list.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ① 子元素依序滑入 */
+.stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.33,0,0.2,1); }
+.stagger-item.stagger-in { opacity: 1; transform: none; }
+
+/* ② 頂部金色捲動進度線 */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left center;
+  z-index: 2000; pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item { opacity: 1 !important; transform: none !important; transition: none; }
+}
+
+/* ③ Hero logo 退場（縮小+淡出，搭配 script.js） */
+.hero .wordmark-img { will-change: transform, opacity; transform-origin: center top; }
+@media (prefers-reduced-motion: reduce) { .hero .wordmark-img { transform: none !important; opacity: 1 !important; } }

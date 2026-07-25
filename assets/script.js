@@ -63,3 +63,69 @@ if (reduced) {
   }, { threshold: 0.15 });
   document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 }
+
+// ============================================================
+// 進階滾動效果（2026-07 新增・只新增不改動既有；移除本段即復原）
+// ============================================================
+
+// ① 卡片/清單「依序」滑入（stagger cascade）
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var groups = document.querySelectorAll(".pillars, .directory-grid, .benefits, .item-list, .insight-list");
+  if (!groups.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var kids = e.target.children, i;
+      for (i = 0; i < kids.length; i++) {
+        (function (el, idx) {
+          el.style.transitionDelay = (idx * 0.08) + "s";
+          requestAnimationFrame(function () { el.classList.add("stagger-in"); });
+        })(kids[i], i);
+      }
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12 });
+  groups.forEach(function (g) {
+    var kids = g.children, i;
+    for (i = 0; i < kids.length; i++) kids[i].classList.add("stagger-item");
+    io.observe(g);
+  });
+})();
+
+// ② 頂部金色捲動進度線
+(function () {
+  var bar = document.createElement("div");
+  bar.className = "scroll-progress";
+  bar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bar);
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? h.scrollTop / max : 0;
+    bar.style.transform = "scaleX(" + p + ")";
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+
+// ③ Hero logo 隨滑動優雅退場：明顯縮小 + 淡出 + 微上移
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var logo = document.querySelector(".hero .wordmark-img");
+  if (!logo) return;
+  var ticking = false;
+  function apply() {
+    var y = window.scrollY || window.pageYOffset || 0;
+    var p = Math.min(y / 480, 1);          // 前 480px 內完成
+    var scale = 1 - p * 0.22;              // 1 → 0.78（明顯縮小）
+    var op = 1 - p * 0.75;                 // 1 → 0.25（明顯淡出）
+    logo.style.transform = "translateY(" + (y * 0.12) + "px) scale(" + scale + ")";
+    logo.style.opacity = op.toFixed(3);
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) { requestAnimationFrame(apply); ticking = true; }
+  }, { passive: true });
+})();
